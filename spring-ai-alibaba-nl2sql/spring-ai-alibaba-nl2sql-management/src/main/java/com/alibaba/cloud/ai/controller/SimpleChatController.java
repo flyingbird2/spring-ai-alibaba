@@ -53,8 +53,6 @@ public class SimpleChatController {
 		schemaInitRequest.getDbConfig().setSchema("nl2sql_database");
 		schemaInitRequest.getDbConfig().setDialectType("mysql");
 		schemaInitRequest.setTables(Arrays.asList("agent"));
-//		schemaInitRequest
-//			.setTables(Arrays.asList("agent"));
 		simpleVectorStoreService.schema(schemaInitRequest);
 		return simpleNl2SqlService.nl2sql(input);
 	}
