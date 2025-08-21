@@ -44,9 +44,17 @@ public class SimpleChatController {
 	@PostMapping("/simpleChat")
 	public String simpleNl2Sql(@RequestBody String input) throws Exception {
 		SchemaInitRequest schemaInitRequest = new SchemaInitRequest();
-		schemaInitRequest.setDbConfig(dbConfig);
-		schemaInitRequest
-			.setTables(Arrays.asList("categories", "order_items", "orders", "products", "users", "product_categories"));
+//		schemaInitRequest.setDbConfig(dbConfig);
+//		SchemaInitRequest request = new SchemaInitRequest();
+		schemaInitRequest.setDbConfig(new DbConfig());
+		schemaInitRequest.getDbConfig().setUrl("jdbc:mysql://localhost:3306/nl2sql_database");
+		schemaInitRequest.getDbConfig().setUsername("root");
+		schemaInitRequest.getDbConfig().setPassword("qihf.123");
+		schemaInitRequest.getDbConfig().setSchema("nl2sql_database");
+		schemaInitRequest.getDbConfig().setDialectType("mysql");
+		schemaInitRequest.setTables(Arrays.asList("agent"));
+//		schemaInitRequest
+//			.setTables(Arrays.asList("agent"));
 		simpleVectorStoreService.schema(schemaInitRequest);
 		return simpleNl2SqlService.nl2sql(input);
 	}
