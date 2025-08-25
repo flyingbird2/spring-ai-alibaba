@@ -21,6 +21,7 @@ import com.alibaba.cloud.ai.graph.state.AgentStateFactory;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -37,7 +38,7 @@ public abstract class JacksonStateSerializer extends PlainTextStateSerializer {
 	protected final ObjectMapper objectMapper;
 
 	protected JacksonStateSerializer(AgentStateFactory<OverAllState> stateFactory) {
-		this(stateFactory, new ObjectMapper());
+		this(stateFactory, new ObjectMapper().registerModule(new Jdk8Module()));
 		this.objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
 	}
